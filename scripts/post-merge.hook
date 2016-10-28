@@ -29,14 +29,17 @@
 # exec 2<&-
 # exec 1<>LOG_FILE
 # exec 2>&1
-# echo "This line will appear in LOG_FILE, not 'on screen'"
+# echo "LOG: $(date)"
+# echo "ENV: $(env | sort)"
+# echo "PWD: $(pwd)"
+# set -x
 
 cd $(dirname "$(readlink -f "$0")") # canonicalise directory
-unset GIT_DIR
 
 HTTP=openmirage.org
 HTTPS=mirage.io
 
+unset GIT_DIR
 ROOT=$(git rev-parse --show-toplevel)
 KERNEL=$ROOT/xen/$(cat "$ROOT/xen/latest")
 
